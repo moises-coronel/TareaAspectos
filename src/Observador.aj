@@ -1,7 +1,10 @@
-import java.util.Observable;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
 public aspect Observador {
-	pointcut success() : execution(* actionPerformed*(..) );
-    after() : success() {
-    	System.out.println("ELIGIÓ COLOR");
+	JButton amarillo,azul,rojo;
+	pointcut success(ActionEvent clr) : execution(* actionPerformed*(ActionEvent))&& args(clr);
+    after(ActionEvent clr) : success(clr) {	
+    	System.out.println("se observa que eligio color: "+clr.getActionCommand());
     }
 }
